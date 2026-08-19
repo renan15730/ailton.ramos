@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ailton Ramos — Reparos & Pequenas Obras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1C2321;
+    --charcoal-2:#252D2A;
+    --concrete:#E9E5DB;
+    --concrete-2:#DBD6C8;
+    --steel:#3D5A6C;
+    --steel-light:#5E7E90;
+    --safety:#F2B705;
+    --safety-dark:#C99200;
+    --ink:#14171A;
+    --paper:#FAFAF7;
+    --line: rgba(20,23,26,0.12);
+    --line-dark: rgba(250,250,247,0.14);
+    --radius: 3px;
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--concrete);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+
+  h1,h2,h3{
+    font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0;
+    line-height:0.98;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  :focus-visible{
+    outline: 3px solid var(--safety);
+    outline-offset: 2px;
+  }
+
+  button{font-family:inherit;}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(18px);}
+  .reveal.is-visible{
+    opacity:1; transform:translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(28,35,33,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:var(--maxw); margin:0 auto;
+    color:var(--paper);
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:34px; height:34px; border:2px solid var(--safety);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Barlow Condensed'; font-weight:900; font-size:1.05rem;
+    color:var(--safety); flex:none;
+  }
+  .brand-text{font-family:'Barlow Condensed'; font-weight:800; font-size:1.15rem; letter-spacing:0.03em; text-transform:uppercase;}
+  .brand-text span{display:block; font-family:'IBM Plex Mono'; font-size:0.6rem; letter-spacing:0.16em; color:var(--steel-light); font-weight:600; text-transform:uppercase; margin-top:1px;}
+
+  .nav-links{display:flex; gap:30px; list-style:none; margin:0; padding:0; font-size:0.92rem; font-weight:500;}
+  .nav-links a{text-decoration:none; opacity:0.85; border-bottom:1px solid transparent; padding-bottom:3px;}
+  .nav-links a:hover{opacity:1; border-color:var(--safety);}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:var(--radius);
+    font-weight:700; font-size:0.9rem; text-decoration:none;
+    border:2px solid transparent; cursor:pointer;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .btn-primary{background:var(--safety); color:var(--ink);}
+  .btn-primary:hover{background:var(--safety-dark); transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line-dark); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--safety); color:var(--safety);}
+  .nav .btn{padding:10px 18px; font-size:0.85rem;}
+
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--charcoal); color:var(--paper);
+    position:relative; overflow:hidden;
+    padding:76px 0 64px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image: radial-gradient(ellipse 90% 70% at 70% 30%, black 40%, transparent 85%);
+    opacity:0.6;
+  }
+  .hero-grid{
+    position:relative; display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero .eyebrow{color:var(--safety); margin-bottom:16px;}
+  .hero h1{font-size:clamp(2.6rem, 5.4vw, 4.1rem); font-weight:800; color:var(--paper);}
+  .hero h1 em{font-style:normal; color:var(--safety);}
+  .hero p.lede{
+    font-family:'Inter'; font-size:1.08rem; color:rgba(250,250,247,0.82);
+    max-width:46ch; margin:22px 0 30px; font-weight:400;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  .trust-strip{
+    display:flex; gap:0; margin-top:44px; border-top:1px solid var(--line-dark);
+    flex-wrap:wrap;
+  }
+  .trust-item{
+    flex:1 1 200px; padding:16px 18px 0; font-family:'IBM Plex Mono'; font-size:0.76rem;
+    color:rgba(250,250,247,0.75); letter-spacing:0.02em; border-right:1px solid var(--line-dark);
+  }
+  .trust-item:last-child{border-right:none;}
+  .trust-item b{display:block; font-family:'Barlow Condensed'; color:var(--paper); font-size:1.5rem; font-weight:700; letter-spacing:0.01em; margin-bottom:2px;}
+
+  /* Hero measuring card */
+  .job-card{
+    background:var(--charcoal-2); border:1px solid var(--line-dark); border-radius:var(--radius);
+    padding:26px 24px; position:relative;
+  }
+  .job-card .tag{
+    font-family:'IBM Plex Mono'; font-size:0.68rem; letter-spacing:0.12em; color:var(--steel-light);
+    display:flex; justify-content:space-between; text-transform:uppercase; margin-bottom:18px;
+  }
+  .job-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .job-list li{
+    display:flex; align-items:center; gap:12px; font-size:0.95rem; color:var(--paper);
+    padding-bottom:14px; border-bottom:1px dashed var(--line-dark);
+  }
+  .job-list li:last-child{border-bottom:none; padding-bottom:0;}
+  .job-list svg{width:20px; height:20px; flex:none; color:var(--safety);}
+  .job-card .foot{
+    margin-top:20px; padding-top:16px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono'; font-size:0.72rem; color:var(--steel-light); text-transform:uppercase;
+  }
+  .job-card .foot b{color:var(--safety); font-size:0.95rem; font-family:'Barlow Condensed'; letter-spacing:0.02em;}
+
+  /* ---------- Caution stripe signature ---------- */
+  .stripe{
+    background:repeating-linear-gradient(-45deg, var(--safety) 0 26px, var(--ink) 26px 52px);
+    overflow:hidden; white-space:nowrap; border-top:3px solid var(--ink); border-bottom:3px solid var(--ink);
+  }
+  .stripe-track{
+    display:inline-flex; padding:9px 0; animation: scroll-stripe 26s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .stripe-track{animation:none;} }
+  .stripe-track span{
+    font-family:'IBM Plex Mono'; font-weight:600; font-size:0.78rem; letter-spacing:0.14em;
+    color:var(--ink); text-transform:uppercase; padding:0 22px; flex:none;
+  }
+  @keyframes scroll-stripe{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- Section shell ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:640px; margin-bottom:46px;}
+  .section-head .eyebrow{color:var(--steel); margin-bottom:12px;}
+  .section-head h2{font-size:clamp(2rem, 3.6vw, 2.7rem); font-weight:800;}
+  .section-head p{color:rgba(20,23,26,0.68); font-size:1.02rem; max-width:56ch; margin-top:14px;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--concrete);}
+  .service-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line);}
+  @media (max-width:860px){ .service-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .service-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--concrete); padding:32px 26px; position:relative;
+    transition: background 0.2s ease;
+  }
+  .service-card:hover{background:var(--concrete-2);}
+  .service-card svg{width:30px; height:30px; color:var(--steel); margin-bottom:20px;}
+  .service-card h3{font-size:1.35rem; font-weight:700; margin-bottom:10px;}
+  .service-card p{font-size:0.92rem; color:rgba(20,23,26,0.68); margin:0;}
+
+  /* ---------- How it works ---------- */
+  .how{background:var(--charcoal); color:var(--paper);}
+  .how .section-head .eyebrow{color:var(--safety);}
+  .how .section-head p{color:rgba(250,250,247,0.7);}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+  @media (max-width:800px){ .steps{grid-template-columns:1fr; gap:36px;} }
+  .step{position:relative; padding-left:56px;}
+  .step .num{
+    position:absolute; left:0; top:-4px; font-family:'Barlow Condensed'; font-weight:900;
+    font-size:2.6rem; color:transparent; -webkit-text-stroke:1.5px var(--safety);
+  }
+  .step h3{font-size:1.3rem; font-weight:700; margin-bottom:8px; color:var(--paper);}
+  .step p{color:rgba(250,250,247,0.72); font-size:0.94rem; margin:0;}
+
+  /* ---------- Why ---------- */
+  .why{background:var(--concrete-2);}
+  .why-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+  @media (max-width:860px){ .why-grid{grid-template-columns:1fr;} }
+  .why-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0;}
+  .why-list li{
+    display:flex; gap:16px; padding:20px 0; border-top:1px solid var(--line);
+  }
+  .why-list li:last-child{border-bottom:1px solid var(--line);}
+  .why-list svg{width:22px; height:22px; color:var(--safety-dark); flex:none; margin-top:2px;}
+  .why-list h3{font-family:'Inter'; text-transform:none; font-weight:700; font-size:1.02rem; margin-bottom:4px;}
+  .why-list p{margin:0; font-size:0.9rem; color:rgba(20,23,26,0.65);}
+
+  .quote-card{
+    background:var(--charcoal); color:var(--paper); padding:32px 28px; border-radius:var(--radius);
+    margin-bottom:18px; border-left:4px solid var(--safety);
+  }
+  .quote-card p{font-family:'Inter'; font-size:1.05rem; font-weight:400; line-height:1.55; margin:0 0 14px;}
+  .quote-card .who{font-family:'IBM Plex Mono'; font-size:0.74rem; letter-spacing:0.06em; color:var(--steel-light); text-transform:uppercase;}
+
+  /* ---------- Area ---------- */
+  .area{background:var(--charcoal); color:var(--paper); text-align:center;}
+  .area h2{font-size:clamp(1.8rem,3.4vw,2.4rem); font-weight:800; margin-bottom:14px;}
+  .area p{color:rgba(250,250,247,0.72); max-width:52ch; margin:0 auto;}
+  .area .eyebrow{color:var(--safety); display:block; margin-bottom:14px;}
+
+  /* ---------- Final CTA ---------- */
+  .cta-final{background:var(--safety); color:var(--ink); text-align:center;}
+  .cta-final h2{font-size:clamp(2.1rem,4.4vw,3.2rem); font-weight:900; margin-bottom:16px;}
+  .cta-final p{font-size:1.05rem; max-width:50ch; margin:0 auto 30px; color:rgba(20,23,26,0.78);}
+  .cta-final .btn-primary{background:var(--ink); color:var(--paper);}
+  .cta-final .btn-primary:hover{background:#000;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:rgba(250,250,247,0.75); padding:44px 0 26px; font-size:0.88rem;}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:24px; border-bottom:1px solid var(--line-dark);}
+  .foot-brand{font-family:'Barlow Condensed'; font-weight:800; color:var(--paper); font-size:1.2rem; text-transform:uppercase;}
+  .foot-col h4{font-family:'IBM Plex Mono'; font-size:0.7rem; letter-spacing:0.1em; color:var(--steel-light); text-transform:uppercase; margin:0 0 10px;}
+  .foot-col p, .foot-col a{display:block; margin:0 0 6px; text-decoration:none; color:rgba(250,250,247,0.75);}
+  .foot-col a:hover{color:var(--safety);}
+  .foot-bottom{padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:'IBM Plex Mono'; font-size:0.72rem; color:rgba(250,250,247,0.45);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">AR</div>
+      <div class="brand-text">Ailton Ramos<span>Reparos &amp; Pequenas Obras</span></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#por-que">Por que eu</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/5577988260540" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Ailton Ramos · Reparos residenciais e comerciais</p>
+      <h1>O reparo que falta<br>pra sua casa <em>funcionar</em><br>de novo.</h1>
+      <p class="lede">Elétrica, hidráulica, pintura, alvenaria e aquele monte de coisa pequena que fica pra depois. Eu resolvo — com prazo combinado e serviço garantido.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://wa.me/5577988260540" target="_blank" rel="noopener">Pedir orçamento agora</a>
+        <a class="btn btn-ghost" href="#servicos">Ver o que eu faço</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item"><b>15+</b>anos consertando casa de gente séria</div>
+        <div class="trust-item"><b>100%</b>orçamento sem compromisso</div>
+        <div class="trust-item"><b>&lt;24h</b>tempo médio de resposta</div>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="tag"><span>Ordem de serviço</span><span>Nº 0142</span></div>
+      <ul class="job-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg> Reparo elétrico — tomada sem energia</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11z"/></svg> Vazamento no registro do banheiro</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg> Fechadura emperrada na porta</li>
+      </ul>
+      <div class="foot"><span>Status</span><b>Resolvido no prazo</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe" aria-hidden="true">
+  <div class="stripe-track">
+    <span>★ Orçamento sem compromisso</span><span>★ Atendimento rápido</span><span>★ Serviço com garantia</span><span>★ Ailton Ramos</span>
+    <span>★ Orçamento sem compromisso</span><span>★ Atendimento rápido</span><span>★ Serviço com garantia</span><span>★ Ailton Ramos</span>
+  </div>
+</div>
+
+<section class="services" id="servicos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">O que eu faço</p>
+      <h2>Reparo pequeno também<br>merece trabalho bem-feito.</h2>
+      <p>Se dá pra arrumar sem quebrar tudo, eu arrumo. Se precisa refazer, eu refaço direito. Esses são os chamados mais comuns.</p>
+    </div>
+  </div>
+  <div class="service-grid">
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+      <h3>Elétrica</h3>
+      <p>Tomadas, disjuntores, troca de fiação, instalação de luminárias e pontos de luz.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11z"/></svg>
+      <h3>Hidráulica</h3>
+      <p>Vazamentos, entupimentos, troca de registros, sifões e reparos em geral.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="4" height="18" rx="1"/><path d="M8 7h12M8 13h12M8 19h8"/></svg>
+      <h3>Pintura</h3>
+      <p>Paredes, tetos, portões e retoques — internos e externos, com acabamento limpo.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg>
+      <h3>Manutenção Geral</h3>
+      <p>Portas, janelas, fechaduras e aquela lista de coisas pequenas acumuladas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Do chamado à casa arrumada.</h2>
+      <p>Três passos, sem enrolação e sem letra miúda no orçamento.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <h3>Chama no WhatsApp</h3>
+        <p>Conta o que precisa ou manda uma foto do problema. Respondo rápido.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <h3>Orçamento sem compromisso</h3>
+        <p>Avalio o serviço — pessoalmente ou à distância — e combino prazo e valor com você.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <h3>Serviço feito e garantido</h3>
+        <p>Executo no que foi combinado, deixo o local limpo e o reparo com garantia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="por-que">
+  <div class="wrap why-grid">
+    <div class="section-head reveal" style="margin-bottom:0;">
+      <p class="eyebrow">Por que eu</p>
+      <h2>Trabalho de quem vai voltar na sua casa se precisar.</h2>
+      <ul class="why-list" style="margin-top:26px;">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><h3>Orçamento claro</h3><p>Valor combinado antes de começar, sem surpresa na conta.</p></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><h3>Material indicado com honestidade</h3><p>Sugiro o que realmente resolve, dentro do seu orçamento.</p></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><h3>Garantia no serviço</h3><p>Se algo não ficou certo, eu volto e ajusto.</p></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><h3>Pontualidade</h3><p>Chego no horário combinado — seu tempo também vale.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal" style="display:flex; align-items:center; justify-content:center;">
+      <div class="quote-card" style="margin:0; text-align:center;">
+        <p class="eyebrow" style="color:var(--safety); margin-bottom:14px;">Fale direto com o Ailton</p>
+        <h3 style="text-transform:uppercase; font-family:'Barlow Condensed'; font-size:1.6rem; font-weight:800; color:var(--paper); margin-bottom:16px;">Manda o problema pelo WhatsApp e recebe o orçamento sem compromisso.</h3>
+        <a class="btn btn-primary" href="https://wa.me/5577988260540" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="area">
+  <div class="wrap">
+    <span class="eyebrow reveal">Área de atendimento</span>
+    <h2 class="reveal">Atendo em Vitória da Conquista/BA<br>e cidades vizinhas.</h2>
+    <p class="reveal">Bairros e distritos de Vitória da Conquista e municípios próximos como Barra do Choça, Anagé, Cândido Sales e Planalto. Chame no WhatsApp e confirmo se o seu endereço está dentro da área de atendimento.</p>
+  </div>
+</section>
+
+<section class="cta-final" id="contato">
+  <div class="wrap">
+    <h2 class="reveal">Manda o que precisa consertar.</h2>
+    <p class="reveal">Resposta rápida, orçamento sem compromisso e reparo feito direito da primeira vez.</p>
+    <a class="btn btn-primary reveal" href="https://wa.me/5577988260540" target="_blank" rel="noopener">Chamar Ailton no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Ailton Ramos</div>
+        <p style="margin-top:6px; color:rgba(250,250,247,0.55);">Reparos & pequenas obras</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5577988260540" target="_blank" rel="noopener">(77) 98826-0540 · WhatsApp</a>
+      </div>
+      <div class="foot-col">
+        <h4>Redes</h4>
+        <a href="https://instagram.com/ailton.ramos.520562" target="_blank" rel="noopener">@ailton.ramos.520562</a>
+      </div>
+      <div class="foot-col">
+        <h4>Atendimento</h4>
+        <p style="margin:0;">Seg a sáb, 8h às 18h</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ailton Ramos — Reparos & Pequenas Obras</span>
+      <span>Bairros/cidades vizinhas exibidos são exemplo — confirme a lista real com o Ailton</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
